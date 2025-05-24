@@ -1,0 +1,100 @@
+<div class="flex h-screen bg-[var(--bg-100)] text-[var(--text-100)] relative transition-all duration-300">
+  <button
+    (click)="toggleSidebar()"
+    class="fixed top-4 left-4 z-50 text-[var(--accent-200)] bg-[var(--bg-200)] p-2 rounded-full shadow-lg hover:bg-[var(--bg-300)] transition-all duration-300"
+  >
+    {{ isSidebarOpen ? '✕' : '☰' }}
+  </button>
+
+  <aside
+    [ngClass]="{'w-64 block': isSidebarOpen, 'hidden': !isSidebarOpen}"
+    class="bg-[var(--bg-200)] text-[var(--text-100)] flex flex-col p-4 transition-all duration-300 border-r border-[var(--bg-300)] shadow-lg"
+  >
+    <nav class="space-y-4 flex flex-col mt-12">
+      <a href="#" class="block hover:text-[var(--accent-200)] transition-colors duration-300">DEEPSEEK</a>
+      <a href="#" class="block hover:text-[var(--accent-200)] transition-colors duration-300">CHATGPT</a>
+      <a href="#" class="block hover:text-[var(--accent-200)] transition-colors duration-300">CLAUDE</a>
+      <a href="#" class="block hover:text-[var(--accent-200)] transition-colors duration-300">GEMINI</a>
+    </nav>
+
+    <div class="mt-auto">
+      <button
+        (click)="logout()"
+        class="bg-[var(--accent-200)] text-white py-2 px-4 rounded hover:bg-[var(--accent-100)] transition-all duration-300"
+      >
+        LOGOUT
+      </button>
+    </div>
+  </aside>
+
+  <main
+    [ngClass]="{'ml-0': !isSidebarOpen, 'ml-64': isSidebarOpen}"
+    class="flex-1 flex flex-col p-6 relative transition-all duration-300"
+  >
+    <div class="absolute top-4 right-16 flex flex-col items-end space-y-4">
+      <button
+        (click)="toggleDropdown()"
+        class="w-14 h-14 rounded-full overflow-hidden border-2 border-[var(--bg-300)] hover:border-[var(--accent-200)] transition-all duration-300"
+      >
+        <img [src]="imgUrl" alt="Foto de perfil" class="w-full h-full object-cover">
+      </button>
+
+      <div
+        *ngIf="isDropdownOpen"
+        class="absolute right-0 mt-2 w-48 bg-[var(--bg-200)] shadow-lg rounded-lg border border-[var(--bg-300)]"
+      >
+        <button
+          (click)="editProfile()"
+          class="block w-full text-left px-4 py-2 hover:bg-[var(--bg-300)] transition-colors duration-300"
+        >
+          <mat-icon class="mr-2">person</mat-icon> Profile
+        </button>
+        <button
+          (click)="logout()"
+          class="block w-full text-left px-4 py-2 hover:bg-[var(--bg-300)] transition-colors duration-300"
+        >
+          <mat-icon class="mr-2">logout</mat-icon> Logout
+        </button>
+      </div>
+
+      <app-theme-toggle></app-theme-toggle>
+    </div>
+
+    <div
+      [ngClass]="{'max-w-[90%]': !isSidebarOpen, 'max-w-6xl': isSidebarOpen}"
+      class="w-full h-[80vh] bg-[var(--bg-200)] border border-[var(--bg-300)] p-10 rounded-2xl shadow-xl transition-all duration-300 flex flex-col"
+    >
+      <h1 class="text-3xl font-bold mb-6 text-[var(--primary-300)]">Chat</h1>
+
+      <div
+        #messagesContainer
+        class="flex-1 overflow-y-auto mb-6 space-y-4"
+      >
+        <div
+          *ngFor="let msg of messages"
+          class="p-4 bg-[var(--primary-200)] rounded whitespace-pre-wrap break-words shadow-sm hover:shadow-md transition-shadow duration-300"
+        >
+          <strong class="text-[var(--accent-200)]">{{ msg.role === 'user' ? user?.name : 'AI' }}:</strong> {{ msg.content }}
+        </div>
+      </div>
+
+      <div class="flex items-end space-x-3">
+        <textarea
+          [(ngModel)]="message"
+          (input)="adjustTextareaHeight($event)"
+          #messageInput
+          class="flex-1 bg-[var(--bg-300)] text-[var(--text-100)] rounded px-5 py-3 resize-none min-h-[56px] max-h-48 overflow-y-auto whitespace-pre-wrap break-words placeholder-[var(--text-200)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-200)] transition-all duration-300"
+          placeholder="Escribe un mensaje..."
+          (keyup.enter)="sendMessage()"
+          maxlength="{{ maxLength }}"
+        ></textarea>
+        <button
+          (click)="sendMessage()"
+          class="bg-[var(--accent-200)] text-white p-4 rounded-full hover:bg-[var(--accent-100)] transition-all duration-300 hover:shadow-lg"
+        >
+          ➤
+        </button>
+      </div>
+    </div>
+  </main>
+</div>

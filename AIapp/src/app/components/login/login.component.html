@@ -1,0 +1,46 @@
+<div class="flex items-center justify-center min-h-screen bg-[--bg-200]">
+  <div class="absolute top-4 right-4">
+    <app-theme-toggle></app-theme-toggle>
+  </div>
+
+    <!-- Login Form -->
+    <section class="w-full max-w-lg p-8 bg-[--bg-100] rounded-2xl shadow-lg border border-[--bg-300] 
+        flex flex-col items-center justify-center mx-auto">
+      
+      <h2 class="text-3xl font-bold text-[--text-100] mb-6 text-center">Login</h2>
+      
+      <form (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full">
+        <input 
+          type="text" 
+          [(ngModel)]="credentials.username" 
+          name="username" 
+          placeholder="Username" 
+          required 
+          class="p-3 border border-[--primary-200] rounded-lg bg-[--primary-100] text-[--text-100] 
+          focus:outline-none focus:ring-2 focus:ring-[--accent-200]" 
+        />
+
+        <input 
+          type="password" 
+          [(ngModel)]="credentials.password" 
+          name="password" 
+          placeholder="Password" 
+          required 
+          class="p-3 border border-[--primary-200] rounded-lg bg-[--primary-100] text-[--text-100] 
+          focus:outline-none focus:ring-2 focus:ring-[--accent-200]" 
+        />
+
+        <a routerLink="/register" class="text-[--text-100] text-sm mt-2 hover:underline">
+         No tengo una cuenta
+        </a>
+
+        <button 
+          type="submit" 
+          class="bg-blue-700 text-white py-3 px-5 rounded-lg shadow-md text-lg 
+          hover:bg-blue-600 transition"
+        >
+          LOGIN
+        </button>
+      </form>
+    </section>
+</div>

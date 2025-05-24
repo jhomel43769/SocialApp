@@ -1,0 +1,149 @@
+<div class="min-h-screen bg-[var(--bg-100)] text-[var(--text-100)] p-6">
+  <!-- Cargando -->
+  <div *ngIf="isLoading" class="flex justify-center items-center h-screen">
+    <p class="text-[var(--text-100)]">Cargando perfil...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="flex justify-center items-center h-screen">
+    <p class="text-red-500">{{ error }}</p>
+  </div>
+
+  <!-- Perfil del usuario -->
+  <div *ngIf="user && !isLoading" class="space-y-6">
+    <!-- Botón para ir a Home (esquina superior izquierda) -->
+    <button
+      (click)="redirectToHome()"
+      class="absolute top-4 left-4 bg-[var(--accent-100)] text-[var(--bg-100)] w-10 h-10 rounded-full flex items-center justify-center hover:bg-[var(--accent-200)] transition-all duration-300"
+    >
+      <mat-icon>home</mat-icon> <!-- Icono de home -->
+    </button>
+
+    <!-- Botón de cambiar tema (esquina superior derecha) -->
+    <div class="absolute top-4 right-4 z-10">
+      <app-theme-toggle></app-theme-toggle>
+    </div>
+
+    <!-- Foto de fondo -->
+    <div
+      class="h-64 bg-cover bg-center rounded-lg relative"
+      [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}"
+    >
+      <!-- Botón para editar fondo (abajo a la derecha, redondo) -->
+      <button
+        (click)="openEditModal('background')"
+        class="absolute bottom-2 right-2 bg-[var(--accent-100)] text-[var(--bg-100)] w-10 h-10 rounded-full flex items-center justify-center hover:bg-[var(--accent-200)] transition-all duration-300"
+      >
+        <mat-icon>edit</mat-icon> <!-- Icono de edición -->
+      </button>
+
+      <!-- Foto de perfil -->
+      <div class="absolute -bottom-16 left-6">
+        <img
+          [src]="profileImageUrl"
+          alt="Foto de perfil"
+          class="w-32 h-32 rounded-full border-4 border-[var(--accent-100)] shadow-lg"
+        />
+        
+        <!-- Botón para editar foto de perfil (esquina inferior derecha, redondo) -->
+        <button
+          (click)="openEditModal('profile')"
+          class="absolute bottom-0 right-0 bg-[var(--accent-100)] text-[var(--bg-100)] w-10 h-10 rounded-full flex items-center justify-center hover:bg-[var(--accent-200)] transition-all duration-300"
+        >
+          <mat-icon>edit</mat-icon> <!-- Icono de edición -->
+        </button>
+      </div>
+    </div>
+
+    <!-- Información del usuario -->
+    <div class="bg-[var(--bg-200)] p-6 rounded-lg shadow-xl">
+      <h1 class="text-4xl font-bold text-[var(--primary-300)]">
+        {{ user.name }} {{ user.lastname }}
+      </h1>
+      <p class="mt-2 text-[var(--text-200)]">{{ user.bio }}</p>
+      <div class="mt-4 space-y-2 text-[var(--text-200)]">
+        <p><strong>Usuario:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Teléfono:</strong> {{ user.phone }}</p>
+        <p><strong>Fecha de nacimiento:</strong> {{ user.birth | date }}</p>
+      </div>
+    </div>
+
+    <!-- Secciones -->
+    <div class="bg-[var(--bg-200)] p-4 rounded-lg shadow-md flex space-x-4">
+      <button
+        (click)="activeSection = 'Publicaciones'"
+        class="px-4 py-2 rounded-lg transition-all duration-300"
+        [ngClass]="{
+          'bg-[var(--accent-100)] text-[var(--bg-100)]': activeSection === 'Publicaciones',
+          'bg-[var(--bg-300)] text-[var(--text-100)]': activeSection !== 'Publicaciones'
+        }"
+      >
+        Publicaciones
+      </button>
+      <button
+        (click)="activeSection = 'Amigos'"
+        class="px-4 py-2 rounded-lg transition-all duration-300"
+        [ngClass]="{
+          'bg-[var(--accent-100)] text-[var(--bg-100)]': activeSection === 'Amigos',
+          'bg-[var(--bg-300)] text-[var(--text-100)]': activeSection !== 'Amigos'
+        }"
+      >
+        Amigos
+      </button>
+      <button
+        (click)="activeSection = 'Configuración'"
+        class="px-4 py-2 rounded-lg transition-all duration-300"
+        [ngClass]="{
+          'bg-[var(--accent-100)] text-[var(--bg-100)]': activeSection === 'Configuración',
+          'bg-[var(--bg-300)] text-[var(--text-100)]': activeSection !== 'Configuración'
+        }"
+      >
+        Configuración
+      </button>
+    </div>
+
+    <!-- Contenido de la sección activa -->
+    <div class="bg-[var(--bg-200)] p-6 rounded-lg shadow-md mt-6">
+      <div *ngIf="activeSection === 'Publicaciones'">
+        <p class="text-[var(--text-200)]">Aquí van las publicaciones del usuario.</p>
+      </div>
+      <div *ngIf="activeSection === 'Amigos'">
+        <p class="text-[var(--text-200)]">Aquí va la lista de amigos.</p>
+      </div>
+      <div *ngIf="activeSection === 'Configuración'">
+        <p class="text-[var(--text-200)]">Aquí van las opciones de configuración.</p>
+      </div>
+    </div>
+
+    <!-- Modal para editar imágenes -->
+    <div *ngIf="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+      <div class="bg-[var(--bg-200)] p-6 rounded-lg shadow-xl w-96">
+        <h2 class="text-2xl font-bold text-[var(--primary-300)] mb-4">
+          {{ modalTitle }}
+        </h2>
+        <!-- Input para subir una imagen -->
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          class="w-full p-2 border border-[var(--bg-300)] rounded-lg bg-[var(--bg-100)] text-[var(--text-100)]"
+        />
+        <div class="mt-4 flex justify-end space-x-4">
+          <button
+            (click)="closeModal()"
+            class="px-4 py-2 bg-[var(--bg-300)] text-[var(--text-100)] rounded-lg hover:bg-[var(--bg-400)] transition-all duration-300"
+          >
+            <mat-icon>close</mat-icon> Cancelar <!-- Icono de cerrar -->
+          </button>
+          <button
+            (click)="saveImage()"
+            class="px-4 py-2 bg-[var(--accent-100)] text-[var(--bg-100)] rounded-lg hover:bg-[var(--accent-200)] transition-all duration-300"
+          >
+            <mat-icon>save</mat-icon> Guardar <!-- Icono de guardar -->
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

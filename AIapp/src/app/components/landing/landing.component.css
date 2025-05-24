@@ -1,0 +1,45 @@
+/* Importa los estilos de Swiper */
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
+
+/* Estilos para el carrusel */
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Estilos para los botones de navegación */
+/* Estilos para los botones de navegación */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #4f46e5; /* Color indigo-600 */
+}
+
+.dark .swiper-button-next,
+.dark .swiper-button-prev {
+  color: #d1d5db; /* Color gray-300 */
+}
+
+.swiper-pagination-bullet {
+  background: #4f46e5; /* Color indigo-600 */
+}
+
+.dark .swiper-pagination-bullet {
+  background: #d1d5db; /* Color gray-300 */
+}
+
+.swiper-pagination-bullet-active {
+  background: #4f46e5; /* Color indigo-600 */
+}
+
+.dark .swiper-pagination-bullet-active {
+  background: #d1d5db; /* Color gray-300 */
+}

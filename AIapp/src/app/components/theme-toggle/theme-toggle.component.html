@@ -1,0 +1,10 @@
+<button
+  (click)="toggleTheme()"
+  class="p-3 rounded-full transition-all duration-300 border border-[var(--bg-300)] shadow-md 
+         bg-[var(--bg-200)] hover:bg-[var(--accent-100)] dark:bg-[var(--primary-300)] 
+         dark:hover:bg-[var(--accent-200)] flex items-center justify-center"
+>
+  <mat-icon [ngClass]="{'text-[var(--accent-200)]': isDarkMode, 'text-[var(--text-100)]': !isDarkMode}">
+    {{ isDarkMode ? 'dark_mode' : 'light_mode' }}
+  </mat-icon>
+</button>

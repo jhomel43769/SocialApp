@@ -1,0 +1,54 @@
+<div class="container">
+  <section class="upload-section">
+    <h2 class="section-title">Upload Image</h2>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input
+        type="text"
+        id="description"
+        [(ngModel)]="description"
+        class="input-field"
+        placeholder="Enter description"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="imageUrl">Image URL</label>
+      <input
+        type="url"
+        id="imageUrl"
+        [(ngModel)]="imageUrl"
+        class="input-field"
+        placeholder="Enter image URL"
+      />
+    </div>
+
+    <button (click)="uploadImage()" class="submit-button">Upload Image</button>
+  </section>
+
+  <!-- Sección para obtener imagen -->
+  <section class="get-image-section">
+    <h2 class="section-title">Get Image</h2>
+    <div class="form-group">
+      <label for="imageId">Image ID</label>
+      <input
+        type="text"
+        id="imageId"
+        [(ngModel)]="imageName"
+        class="input-field"
+        placeholder="Enter image ID"
+      />
+    </div>
+
+    <button (click)="getImage()" class="submit-button">Get Image</button>
+
+    <div *ngIf="imageUrlToDisplay" class="image-container">
+      <h3>Image Preview</h3>
+      <img
+        [src]="imageUrlToDisplay"
+        alt="Fetched Image"
+        class="image-preview"
+      />
+    </div>
+  </section>
+</div>

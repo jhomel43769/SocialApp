@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-100: #d4eaf7;
+  --primary-200: #b6ccd8;
+  --primary-300: #3b3c3d;
+  --accent-100: #71c4ef;
+  --accent-200: #00668c;
+  --text-100: #1d1c1c;
+  --text-200: #313d44;
+  --bg-100: #fffefb;
+  --bg-200: #f5f4f1;
+  --bg-300: #cccbc8;
+}
+
+.dark {
+  --primary-100: #1E293B; 
+  --primary-200: #334155; 
+  --primary-300: #CBD5E1; 
+  --accent-100: #E11D48;
+  --accent-200: #FACC15; 
+  --text-100: #F8FAFC; 
+  --text-200: #CBD5E1; 
+  --bg-100: #0F172A;
+  --bg-200: #1E293B; 
+  --bg-300: #334155;
+}
+
+body {
+  background-color: var(--bg-100);
+  color: var(--text-100);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+
+.dark body {
+  background-color: var(--bg-100);
+  color: var(--text-100);
+}

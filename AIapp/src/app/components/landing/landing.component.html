@@ -1,0 +1,77 @@
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <!-- Header -->
+  <header class="bg-indigo-500 dark:bg-gray-800 shadow-md py-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center px-6">
+      <div class="flex items-center space-x-4">
+        <!-- Logo y nombre -->
+        <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-300 dark:border-gray-600">
+          <img src="/5efadf09-d285-46e7-bf34-651711bd8b7a.webp" alt="el logo">
+        </div>
+        <div class="text-2xl font-semibold text-white dark:text-gray-100">Zenify</div>
+      </div>
+
+      <!-- Botones de Login, Register y Toggle Theme -->
+      <div class="flex items-center space-x-4">
+        <!-- Botón de cambio de tema -->
+        <app-theme-toggle></app-theme-toggle>
+
+        <!-- Botones de Login y Register -->
+        <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-300 dark:bg-gray-700 dark:hover:bg-gray-600" routerLink="/login">
+          Login
+        </button>
+        <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-300 dark:bg-gray-700 dark:hover:bg-gray-600" routerLink="/register">
+          Register
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sección principal -->
+  <section class="h-[calc(100vh-80px)] flex items-center justify-center px-6">
+    <!-- Texto de bienvenida -->
+    <div class="w-1/2 pr-8 flex flex-col items-center text-center">
+      <h1 class="text-4xl font-semibold">Bienvenido a Zenify</h1>
+      <p class="text-xl mt-4 max-w-xl">
+        Con Zenify, puedes optimizar tu trabajo y disfrutar de un servicio más rápido y eficiente. Explora todas las funcionalidades que tenemos preparadas para ti.
+      </p>
+      <button class="mt-8 px-8 py-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-lg dark:bg-gray-700 dark:hover:bg-gray-600" routerLink="/login">
+        Empezar
+      </button>
+    </div>
+
+    <!-- Carrusel -->
+    <div class="w-1/2 flex justify-center">
+      <div class="w-[600px] h-[500px] bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+        <div #swiperContainer class="swiper-container h-full">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide flex flex-col items-center justify-center">
+              <img src="https://seeklogo.com/images/C/chatgpt-logo-6E960AECFF-seeklogo.com.png" alt="ChatGPT" class="w-40 h-40 mb-6">
+              <h2 class="text-3xl font-semibold">ChatGPT</h2>
+            </div>
+            <div class="swiper-slide flex flex-col items-center justify-center">
+              <img src="https://images.seeklogo.com/logo-png/33/1/google-cloud-logo-png_seeklogo-336116.png" alt="Cloud" class="w-40 h-40 mb-6">
+              <h2 class="text-3xl font-semibold">Cloud</h2>
+            </div>
+            <div class="swiper-slide flex flex-col items-center justify-center">
+              <img src="https://images.seeklogo.com/logo-png/61/1/gemini-icon-logo-png_seeklogo-611605.png" alt="Gemini" class="w-40 h-40 mb-6">
+              <h2 class="text-3xl font-semibold">Gemini</h2>
+            </div>
+            <div class="swiper-slide flex flex-col items-center justify-center">
+              <img src="https://images.seeklogo.com/logo-png/61/2/deepseek-ai-icon-logo-png_seeklogo-611473.png" alt="DeepSeek" class="w-40 h-40 mb-6">
+              <h2 class="text-3xl font-semibold">DeepSeek</h2>
+            </div>
+            <div class="swiper-slide flex flex-col items-center justify-center">
+              <img src="https://img.freepik.com/vector-gratis/tecnologia-inteligencia-artificial-robotica-aprendizaje-inteligente-bigdata_1150-48136.jpg?semt=ais_hybrid" alt="Zenify" class="w-40 h-40 mb-6">
+              <h2 class="text-3xl font-semibold">Zenify</h2>
+            </div>
+          </div>
+
+          <!-- Paginación y botones de navegación -->
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
